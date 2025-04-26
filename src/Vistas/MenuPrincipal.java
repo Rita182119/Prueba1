@@ -51,6 +51,54 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmversion;			
 	private JPanel contentPane;
 	
+	// Declarando Variables Globales 
+		// Datos mínimos de la 1ra cocina
+		public static String modelo0 ="SAMSUNG SM-A215U NEGRO";
+		public static double precio0 = 949.0;
+		public static double fondo0 = 58.6;
+		public static double ancho0 = 60.0;
+		public static double alto0 = 91.0;
+		public static int quemadores0 = 4;
+		// Datos mínimos de la 2da cocina
+		public static String modelo1 = "LG A567";
+		public static double precio1 = 1089.0;
+		public static double ancho1 = 80.0;
+		public static double alto1 = 94.0;
+		public static double fondo1 = 67.5;
+		public static int quemadores1 = 6;
+
+		// Porcentajes de descuento
+		public static double porcentaje1 = 7.5;
+		public static double porcentaje2 = 10.0;
+		public static double porcentaje3 = 12.5;
+		public static double porcentaje4 = 15.0;
+
+		// Obsequios
+		public static String obsequio1 = "Cupon de Dst. del 50% en las Sirenitas";
+		public static String obsequio2 = "Cupon de Dst. del 70% en las Sirenitas";
+		public static String obsequio3 = "Servicio completo por 1 día";
+
+		// Parámetros adicionales
+		public static int cantidadOptima = 30;
+		public static double cuotaDiaria = 75000.0;
+		
+		// VARIABLES PUBLIC STATICS GLOBALES NUEVAS 
+		// Importe acumulado de ventas por modelo
+		public static double importeAcumulado0, importeAcumulado1, importeAcumulado2,
+		                      importeAcumulado3, importeAcumulado4, importeAcumuladoTotal;
+
+		// Porcentaje de cuota diaria por modelo
+		public static double porcentajeCuota0, porcentajeCuota1, porcentajeCuota2,
+		                      porcentajeCuota3, porcentajeCuota4, porcentajeCuotaTotal;
+
+		// Contador de cantidad acumulada de ventas por modelo
+		public static int contadorVenta0, contadorVenta1, contadorVenta2,
+		                  contadorVenta3, contadorVenta4, contadorVentaTotal;
+
+		// Cantidad acumulada de unidades vendidas por modelo
+		public static int cantUniVendidas0, cantUniVendidas1, cantUniVendidas2,
+		                  cantUniVendidas3, cantUniVendidas4;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

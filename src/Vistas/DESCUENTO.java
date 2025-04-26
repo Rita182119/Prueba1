@@ -164,6 +164,14 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		dispose();
 	}
 	protected void actionPerformedbtnGrabar(ActionEvent e) {
-		 JOptionPane.showInternalMessageDialog(null, "Se modifico el Descuento exitosamente.", "Aviso", 1, null);	     
-	}
+        // Saving the new percentage values
+    	MenuPrincipal.porcentaje1 = Double.parseDouble(txtdsct1.getText());
+    	MenuPrincipal.porcentaje2 = Double.parseDouble(txtdsct2.getText());
+    	MenuPrincipal.porcentaje3 = Double.parseDouble(txtdsct3.getText());
+    	MenuPrincipal.porcentaje4 = Double.parseDouble(txtdsct4.getText());
+
+        // Showing confirmation message
+        JOptionPane.showInternalMessageDialog(null, "Cambio Realizado con Éxito", "Aviso", 1, null);
+        dispose();
+    }
 }

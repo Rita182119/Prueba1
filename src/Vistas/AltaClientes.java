@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -28,6 +30,13 @@ public class AltaClientes extends JFrame implements ActionListener {
 	private JTextArea txtresultado;
 	private JButton btnSalir;
 	
+	
+	public void Mostrarnomyapell() {
+        setTitle("Mostrar Nombre y Apellidos");
+        setSize(300, 100);
+        setLayout(null);
+	} 
+    	  
 	/**
 	 * Launch the application.
 	 */
@@ -91,6 +100,16 @@ public class AltaClientes extends JFrame implements ActionListener {
 		contentPane.add(txtnomyapell);
 		
 		btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				   Mostrarnomyapell mostrar = new Mostrarnomyapell();
+	                mostrar.setVisible(true);
+			
+	                UsuarioData.nombreUsuario = txtnomyapell.getText();
+	                JOptionPane.showMessageDialog(null, "Usuario registrado");
+			}
+		});
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnRegistrar.setBounds(48, 335, 195, 42);
 		contentPane.add(btnRegistrar);
