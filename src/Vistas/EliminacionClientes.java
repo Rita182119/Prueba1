@@ -79,11 +79,14 @@ public class EliminacionClientes extends JFrame implements ActionListener {
 		txteliminacion = new JTextArea();
 		txteliminacion.setBounds(98, 287, 527, 146);
 		contentPane.add(txteliminacion);
+		txteliminacion.setEditable(false);
 				
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnEliminar.setBounds(252, 212, 195, 42);
-		contentPane.add(btnEliminar);		
+		btnEliminar.addActionListener(this);
+		contentPane.add(btnEliminar);
+	
 		
 		btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(this);
@@ -96,8 +99,37 @@ public class EliminacionClientes extends JFrame implements ActionListener {
 		if (e.getSource()==btnSalir) {
 			actionPerformedbtnSalir (e);
 		}	
+		if (e.getSource() == btnEliminar) {
+		    eliminarCliente();
+		}
 	}
 	protected void actionPerformedbtnSalir(ActionEvent e) {
 		dispose();
 	}	
+	private void eliminarCliente() {
+		String dniIngresado = txtdni.getText().trim();
+	    boolean eliminado = false;
+
+	    if (dniIngresado.isEmpty()) {
+	        txteliminacion.setText("Por favor, ingrese un DNI válido.");
+	        return;
+	    }
+
+	    for (int i = 0; i < MenuPrincipal.getListaClientes().size(); i++) {
+	        String[] cliente = MenuPrincipal.getListaClientes().get(i);
+	        if (cliente[0].equals(dniIngresado)) {
+	            String nombre = cliente[1];
+	            MenuPrincipal.getListaClientes().remove(i);
+	            eliminado = true;
+	            txteliminacion.setText("Cliente eliminado:\nDNI: " + dniIngresado + "\nNombre: " + nombre);
+	            break;
+	        }
+	    }
+
+	    if (!eliminado) {
+	        txteliminacion.setText("No se encontró un cliente con el DNI: " + dniIngresado);
+	    }
+
+	    txtdni.setText("");
+	}
 }

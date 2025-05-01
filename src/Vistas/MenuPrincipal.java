@@ -60,6 +60,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
             listaClientes.add(datos);
             System.out.println("Cliente registrado: " + datos[0] + " - " + datos[1]);
         }
+    	public static ArrayList<String[]> getListaClientes() {
+    	    return listaClientes;
+    	}
 		
 		// Datos mínimos de la 1ra cocina
 		public static String modelo0 ="SAMSUNG SM-A215U NEGRO";
@@ -396,7 +399,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				newframe.setVisible(true);
 			}
 			protected void actionPerformedmntmconsulclie(ActionEvent e) {
-				ConsultarClientes newframe = new ConsultarClientes(null);
+				ConsultarClientes newframe = new ConsultarClientes();
 				newframe.setLocationRelativeTo(null);						
 				newframe.setVisible(true);	
 			}

@@ -106,14 +106,9 @@ public class ModificacionClientes extends JDialog implements ActionListener {
 		btnSalir.setBounds(511, 23, 150, 32);
 		contentPane.add(btnSalir);
 
-		clientes = new HashMap<>();
-		clientes.put("12345678", "Juan Pérez");
-		clientes.put("87654321", "Ana López");
-		clientes.put("11223344", "Carlos Ruiz");
-
 		comboBox.addItem("Seleccione un DNI");
-		for (String dni : clientes.keySet()) {
-			comboBox.addItem(dni);
+		for (String[] cliente : MenuPrincipal.getListaClientes()) {
+		    comboBox.addItem(cliente[0]);
 		}
 	}
 
@@ -129,25 +124,39 @@ public class ModificacionClientes extends JDialog implements ActionListener {
 
 	public void mostrarNombreActual() {
 		String dniSeleccionado = (String) comboBox.getSelectedItem();
-		if (dniSeleccionado.equals("Seleccione un DNI")) {
-			JOptionPane.showMessageDialog(this, "Seleccione un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
-			txtnomyapelli.setText("");
-		} else {
-			String nombre = clientes.get(dniSeleccionado);
-			txtnomyapelli.setText(nombre);
-		}
+	    if (dniSeleccionado.equals("Seleccione un DNI")) {
+	        JOptionPane.showMessageDialog(this, "Seleccione un DNI válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	        txtnomyapelli.setText("");
+	        return;
+	    }
+
+	    for (String[] cliente : MenuPrincipal.getListaClientes()) {
+	        if (cliente[0].equals(dniSeleccionado)) {
+	            txtnomyapelli.setText(cliente[1]); // Mostrar nombre
+	            return;
+	        }
+	    }
+
+	    txtnomyapelli.setText("No encontrado");
 	}
 
 	public void modificarCliente() {
-		String dniSeleccionado = (String) comboBox.getSelectedItem();
-		String nuevoNombre = txtnomyapelli.getText().trim();
+		 String dniSeleccionado = (String) comboBox.getSelectedItem();
+		    String nuevoNombre = txtnomyapelli.getText().trim();
 
-		if (dniSeleccionado.equals("Seleccione un DNI") || nuevoNombre.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Complete los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
+		    if (dniSeleccionado.equals("Seleccione un DNI") || nuevoNombre.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Complete los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+		        return;
+		    }
+
+		    for (String[] cliente : MenuPrincipal.getListaClientes()) {
+		        if (cliente[0].equals(dniSeleccionado)) {
+		            cliente[1] = nuevoNombre; 
+		            JOptionPane.showMessageDialog(this, "Cliente con DNI " + dniSeleccionado + " modificado correctamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+		            return;
+		        }
+		    }
+
+		    JOptionPane.showMessageDialog(this, "Cliente no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-
-		clientes.put(dniSeleccionado, nuevoNombre);
-		JOptionPane.showMessageDialog(this, "Cliente con DNI " + dniSeleccionado + " modificado correctamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
-	}
 }

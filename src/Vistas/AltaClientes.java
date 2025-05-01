@@ -151,7 +151,7 @@ public class AltaClientes extends JDialog implements ActionListener {
 	        	JOptionPane.showMessageDialog(this, "DNI incorrecto, cantiad permitida de 8 digitos.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;		        
 			}else {
-				String[] datosCliente = {nombre, dni};
+				String[] datosCliente = {dni, nombre};
 		        MenuPrincipal.agregarCliente(datosCliente);		        
 		        JOptionPane.showMessageDialog(null, "Se registró correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 			}

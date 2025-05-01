@@ -30,7 +30,6 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	private JTextArea txtregistro;
 	private JButton btnlista;
 	private JButton btnSalir;
-	private static ArrayList<String[]> listaClientes = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -39,7 +38,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultarClientes frame = new ConsultarClientes(null);
+					ConsultarClientes frame = new ConsultarClientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,9 +52,8 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	 */
 	
 	
-	public ConsultarClientes(ArrayList<String[]> listaClientes) {
+	public ConsultarClientes() {
 		
-		this.listaClientes = listaClientes;
 		
 		setTitle("CLIENTES");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,6 +91,10 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		btnlista = new JButton("LISTA DE CLIENTES");
 		btnlista.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnlista.setBounds(278, 340, 195, 42);
+		btnlista.addActionListener(e -> {
+		    ListaClientes ventanaLista = new ListaClientes(MenuPrincipal.getListaClientes());
+		    ventanaLista.setVisible(true);
+		});
 		contentPane.add(btnlista);
 		
 		btnprocesar = new JButton("PROCESAR");
@@ -105,6 +107,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		btnSalir.addActionListener(this);
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnSalir.setBounds(579, 11, 150, 32);
+		
 		contentPane.add(btnSalir);
 	}
 
@@ -117,24 +120,25 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	protected void actionPerformedbtnSalir(ActionEvent e) {
         dispose();
 	}
-	public void buscarCliente() {
-		
-		String dniBuscado = txtdni.getText().trim();
-		
-		if (dniBuscado.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Ingrese un DNI para buscar.");
-            return;
-		}
-		
-		for (String[] cliente : listaClientes) {
-			if(cliente[1].equals(dniBuscado)) {
-				txtregistro.setText(cliente[0]);
-				return;
-			}
-		}
-		
-		txtregistro.setText(dniBuscado);
-		
+	private void buscarCliente() {
+	    String dniIngresado = txtdni.getText().trim();
+
+	    if (dniIngresado.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Ingrese un DNI para buscar.");
+	        return;
+	    }
+
+	    ArrayList<String[]> clientes = MenuPrincipal.getListaClientes();
+
+	    for (String[] cliente : clientes) {
+	        if (cliente[0].equalsIgnoreCase(dniIngresado)) {	            // Supongamos: cliente[0]=DNI, cliente[1]=Nombre, cliente[2]=Teléfono, etc.
+	            String info = cliente[1];
+	            txtregistro.setText(info);
+	            return;
+	        }
+	    }
+
+	    txtregistro.setText("Cliente no encontrado.");
 	}
 	
 	
