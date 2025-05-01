@@ -6,9 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -27,6 +30,8 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	private JTextArea txtregistro;
 	private JButton btnlista;
 	private JButton btnSalir;
+	private static ArrayList<String[]> listaClientes = new ArrayList<>();
+
 	/**
 	 * Launch the application.
 	 */
@@ -34,7 +39,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultarClientes frame = new ConsultarClientes();
+					ConsultarClientes frame = new ConsultarClientes(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +51,12 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarClientes() {
+	
+	
+	public ConsultarClientes(ArrayList<String[]> listaClientes) {
+		
+		this.listaClientes = listaClientes;
+		
 		setTitle("CLIENTES");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 768, 476);
@@ -88,6 +98,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		btnprocesar = new JButton("PROCESAR");
 		btnprocesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnprocesar.setBounds(78, 223, 195, 42);
+		btnprocesar.addActionListener(e -> buscarCliente());
 		contentPane.add(btnprocesar);
 		
 		btnSalir = new JButton("SALIR");
@@ -106,6 +117,28 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	protected void actionPerformedbtnSalir(ActionEvent e) {
         dispose();
 	}
+	public void buscarCliente() {
+		
+		String dniBuscado = txtdni.getText().trim();
+		
+		if (dniBuscado.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Ingrese un DNI para buscar.");
+            return;
+		}
+		
+		for (String[] cliente : listaClientes) {
+			if(cliente[1].equals(dniBuscado)) {
+				txtregistro.setText(cliente[0]);
+				return;
+			}
+		}
+		
+		txtregistro.setText(dniBuscado);
+		
+	}
+	
+	
+	
 }
        
 

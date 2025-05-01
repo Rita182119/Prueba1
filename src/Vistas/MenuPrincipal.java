@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
@@ -52,6 +53,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	
 	// Declarando Variables Globales 
+	
+		// Nombre y DNI
+    	private static ArrayList<String[]> listaClientes = new ArrayList<>();
+    	public static void agregarCliente(String[] datos) {
+            listaClientes.add(datos);
+            System.out.println("Cliente registrado: " + datos[0] + " - " + datos[1]);
+        }
+		
 		// Datos mínimos de la 1ra cocina
 		public static String modelo0 ="SAMSUNG SM-A215U NEGRO";
 		public static double precio0 = 949.0;
@@ -387,7 +396,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 				newframe.setVisible(true);
 			}
 			protected void actionPerformedmntmconsulclie(ActionEvent e) {
-				ConsultarClientes newframe = new ConsultarClientes();
+				ConsultarClientes newframe = new ConsultarClientes(null);
 				newframe.setLocationRelativeTo(null);						
 				newframe.setVisible(true);	
 			}
