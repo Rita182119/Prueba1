@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Vistas.producto.Producto;
+
 import java.awt.Font;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -54,7 +57,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	
 	// Declarando Variables Globales 
 	
-		// Nombre y DNI
+		// Cliente
     	private static ArrayList<String[]> listaClientes = new ArrayList<>();
     	public static void agregarCliente(String[] datos) {
             listaClientes.add(datos);
@@ -63,6 +66,24 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     	public static ArrayList<String[]> getListaClientes() {
     	    return listaClientes;
     	}
+    	
+    	//Produtos
+    	public static ArrayList<String[]> listaProductos = new ArrayList<>();
+    	static {
+            // Agregar productos manualmente (en duro)
+            listaProductos.add(new String[]{"001", "Sansung", "S24", "5000", "100", "300", "258", "Plateado", "Aleman"});
+            listaProductos.add(new String[]{"002", "Motorola", "G30", "500", "100", "300", "258", "Plateado", "Frnaces"});
+            listaProductos.add(new String[]{"003", "Iphone", "Iphone 14", "3000", "100", "300", "258", "Plateado", "EEUU"});
+            listaProductos.add(new String[]{"004", "Xiaomi", "Redmi 8", "1000", "100", "300", "258", "Plateado", "Chino"});
+        }
+    	public static void agregarProductos(String[] datosProductos) {
+            listaProductos.add(datosProductos);
+            System.out.println("Producto registrado: " + datosProductos[1] + " - " + datosProductos[2]);
+        }
+    	public static ArrayList<String[]> getListaProductos() {
+    	    return listaProductos;
+    	}
+    	
 		
 		// Datos mínimos de la 1ra cocina
 		public static String modelo0 ="SAMSUNG SM-A215U NEGRO";

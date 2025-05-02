@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -84,11 +87,16 @@ public class ConsultarProductos extends JFrame implements ActionListener {
 		btnprocesar = new JButton("PROCESAR");
 		btnprocesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnprocesar.setBounds(68, 248, 195, 42);
+		btnprocesar.addActionListener(e -> buscarProducto());
 		contentPane.add(btnprocesar);
 		
 		btnlista = new JButton("LISTA DE PRODUCTOS");
 		btnlista.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnlista.setBounds(258, 400, 195, 42);
+		btnlista.addActionListener(e -> {
+			ListaProductos ventanaLista = new ListaProductos(MenuPrincipal.getListaProductos());
+		    ventanaLista.setVisible(true);
+		});
 		contentPane.add(btnlista);
 						
 		btnSalir = new JButton("SALIR");
@@ -106,6 +114,35 @@ public class ConsultarProductos extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedbtnSalir(ActionEvent e) {
 			dispose();
+	}
+	
+	private void buscarProducto() {
+	    String produtoIngresado = txtlote.getText().trim();
+
+	    if (produtoIngresado.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Ingrese un DNI para buscar.");
+	        return;
+	    }
+
+	    ArrayList<String[]> clientes = MenuPrincipal.getListaProductos();
+
+	    for (String[] cliente : clientes) {
+	        if (cliente[0].equalsIgnoreCase(produtoIngresado)) {
+	        	txtregistro.setText("\n");
+	            txtregistro.append("   Lote: " + cliente[0] + "\n");
+	            txtregistro.append("   Marca: " + cliente[1] + "\n");
+	            txtregistro.append("   Modelo: " + cliente[2] + "\n");
+	            txtregistro.append("   Precio: " + cliente[3] + "\n");
+	            txtregistro.append("   Cantidad: " + cliente[4] + "\n");
+	            txtregistro.append("   Bateria: " + cliente[5] + "\n");
+	            txtregistro.append("   Memoria: " + cliente[6] + "\n");
+	            txtregistro.append("   Color: " + cliente[7] + "\n");
+	            txtregistro.append("   Proveedor: " + cliente[8] + "\n");
+	            return;
+	        }
+	    }
+
+	    txtregistro.setText("Cliente no encontrado.");
 	}
 	
 

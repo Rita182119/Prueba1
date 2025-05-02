@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -206,6 +208,7 @@ public class ModificacionProductos extends JFrame implements ActionListener {
 		btnProcesar = new JButton("PROCESAR");
 		btnProcesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnProcesar.setBounds(481, 96, 150, 32);
+		btnProcesar.addActionListener(this);
 		contentPane.add(btnProcesar);
 		
 		btnModificar = new JButton("MODIFICAR");
@@ -217,6 +220,7 @@ public class ModificacionProductos extends JFrame implements ActionListener {
 		btnSalir.addActionListener(this);
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnSalir.setBounds(500, 19, 150, 32);
+		btnModificar.addActionListener(this);
 		contentPane.add(btnSalir);
 	
 	}
@@ -224,12 +228,73 @@ public class ModificacionProductos extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnSalir) {
-			actionPerformedbtnSalir (e);
-		}				
+			dispose();
+		} else if (e.getSource() == btnProcesar) {
+			mostrarProductos();
+		} else if (e.getSource() == btnModificar) {
+			modificarProducto();
+		}
 	}
-	protected void actionPerformedbtnSalir(ActionEvent e) {
-		dispose();
+	
+	public void mostrarProductos() {
+		String productosA = (String) txtlote.getText();
+	    if (productosA.equals("")) {
+	        JOptionPane.showMessageDialog(this, "Ingrese un Lote válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    for (String[] producto : MenuPrincipal.getListaProductos()) {
+	        if (producto[0].equals(productosA)) {
+	        	txtmarca.setText(producto[1]);
+	        	txtmodelo.setText(producto[2]);
+	        	txtprecio.setText(producto[3]);
+	        	txtcantidad.setText(producto[4]);
+	        	txtbateria.setText(producto[5]);
+	        	txtmemoria.setText(producto[6]);
+	        	txtcolor.setText(producto[7]);
+	        	txtproveedor.setText(producto[8]);
+	            return;
+	        }
+	    }
+
+        JOptionPane.showMessageDialog(this, "Lote no encontrado.", "Alert", JOptionPane.ERROR_MESSAGE);
 	}
+	public void modificarProducto() {
+		 String productoA = (String) txtlote.getText();
+		    String lote = txtlote.getText().trim();
+		    String marca = txtmarca.getText().trim();
+		    String modelo = txtmodelo.getText().trim();
+		    String precio = txtprecio.getText().trim();
+		    String cantidad = txtcantidad.getText().trim();
+		    String bateria = txtbateria.getText().trim();
+		    String memoria = txtmemoria.getText().trim();
+		    String color = txtcolor.getText().trim();
+		    String proveedor = txtproveedor.getText().trim();
+
+		    if (lote.isEmpty() ||  marca.isEmpty() || modelo.isEmpty() || precio.isEmpty() || cantidad.isEmpty() || bateria.isEmpty() || memoria.isEmpty() || color.isEmpty() || proveedor.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Complete los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+		        return;
+		    }
+
+		    for (String[] productos : MenuPrincipal.getListaProductos
+		    		()) {
+		        if (productos[0].equals(productoA)) {
+		        	productos[0] = lote;
+		        	productos[1] = marca; 
+		        	productos[2] = modelo; 
+		        	productos[3] = precio; 
+		        	productos[4] = cantidad; 
+		        	productos[5] = bateria; 
+		        	productos[6] = memoria;
+		        	productos[7] = color; 
+		        	productos[8] = proveedor; 
+		            JOptionPane.showMessageDialog(this, "Se modificaron campos del lote " + productoA + " correctamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+		            return;
+		        }
+		    }
+
+		    JOptionPane.showMessageDialog(this, "Lote no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	
 	
 }

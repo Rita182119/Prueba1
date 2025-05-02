@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Vistas.producto.Producto;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -12,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -42,6 +46,7 @@ public class AltaProductos extends JFrame implements ActionListener {
 	private JLabel lblcolor;
 	private JLabel lblproveedor;
 	private JLabel lblcantidad;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -202,6 +207,45 @@ public class AltaProductos extends JFrame implements ActionListener {
 		btnRegistrar = new JButton("REGISTRAR");
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnRegistrar.setBounds(58, 631, 195, 42);
+		btnRegistrar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            String lote = txtlote.getText();
+		            String marca = txtmarca.getText();
+		            String modelo = txtmodelo.getText();
+		            double precio = Double.parseDouble(txtprecio.getText());
+		            int cantidad = Integer.parseInt(txtcantidad.getText());
+		            String bateria = txtbateria.getText();
+		            String memoria = txtmemoria.getText();
+		            String color = txtcolor.getText();
+		            String proveedor = txtproveedor.getText();
+
+		            String[] datosProductos = {
+		            	    lote, 
+		            	    marca, 
+		            	    modelo, 
+		            	    String.valueOf(precio), 
+		            	    String.valueOf(cantidad), 
+		            	    bateria, 
+		            	    memoria, 
+		            	    color, 
+		            	    proveedor
+		            	};
+		            
+		            
+		            // Agregar a la lista global
+		            MenuPrincipal.agregarProductos(datosProductos);
+
+		            // Mostrar mensaje
+		            JOptionPane.showMessageDialog(null, "Producto registrado correctamente.");
+
+		            // Limpiar campos si deseas
+		            dispose();
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(null, "Error al registrar el producto. Verifica los campos.");
+		        }
+		    }
+		});
 		contentPane.add(btnRegistrar);	
 		
 		btnSalir = new JButton("SALIR");

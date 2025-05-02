@@ -86,6 +86,7 @@ public class EliminacionProductos extends JFrame implements ActionListener {
 		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnEliminar.setBounds(238, 189, 195, 42);
+		btnEliminar.addActionListener(this);
 		contentPane.add(btnEliminar);
 						
 		btnSalir = new JButton("SALIR");
@@ -99,9 +100,39 @@ public class EliminacionProductos extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnSalir) {
 			actionPerformedbtnSalir (e);
-		}				
+		}		
+		if (e.getSource() == btnEliminar) {
+		    eliminarCliente();
+		}
 	}
 	protected void actionPerformedbtnSalir(ActionEvent e) {
 		dispose ();
 	}
+	private void eliminarCliente() {
+		String loteIngresado = txtlote.getText().trim();
+	    boolean eliminado = false;
+
+	    if (loteIngresado.isEmpty()) {
+	        txteliminacion.setText("Por favor, ingrese un DNI válido.");
+	        return;
+	    }
+
+	    for (int i = 0; i < MenuPrincipal.getListaProductos().size(); i++) {
+	        String[] cliente = MenuPrincipal.getListaProductos().get(i);
+	        if (cliente[0].equals(loteIngresado)) {
+	            String nombre = cliente[1];
+	            MenuPrincipal.getListaProductos().remove(i);
+	            eliminado = true;
+	            txteliminacion.setText("Produto eliminado:\n Lote: " + loteIngresado + "\n Marca: " + cliente[1]);
+	            break;
+	        }
+	    }
+
+	    if (!eliminado) {
+	        txteliminacion.setText("No se encontró el lote ingresado: " + loteIngresado);
+	    }
+
+	    txtlote.setText("");
+	}
+	
 }
