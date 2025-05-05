@@ -8,9 +8,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -50,7 +53,7 @@ public class ConsultarFacturacion extends JFrame implements ActionListener {
 	public ConsultarFacturacion() {
 		setTitle("FACTURACION");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 734, 727);
+		setBounds(100, 100, 734, 617);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(206, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,7 +73,7 @@ public class ConsultarFacturacion extends JFrame implements ActionListener {
 		
 		txtcomprobante = new JTextArea();
 		txtcomprobante.setText("\r\n\r\n");
-		txtcomprobante.setBounds(10, 287, 691, 405);
+		txtcomprobante.setBounds(10, 287, 691, 278);
 		contentPane.add(txtcomprobante);
 		
 		txtnrocp = new JTextField();
@@ -83,18 +86,25 @@ public class ConsultarFacturacion extends JFrame implements ActionListener {
 		btnConsultar = new JButton("CONSULTAR");
 		btnConsultar.setBounds(124, 228, 204, 42);
 		contentPane.add(btnConsultar);
+		btnConsultar.addActionListener(e -> buscarCodBoleta());
 		
 		btnRV = new JButton("REGISTRO DE VENTAS");
+		btnRV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnRV.setBounds(376, 228, 204, 42);
+		btnRV.addActionListener(e -> {
+			ReporteFacturacion ventanaLista = new ReporteFacturacion(MenuPrincipal.getCodigosBoletas());
+		    ventanaLista.setVisible(true);
+		});
 		contentPane.add(btnRV);
 						
 		btnsalir = new JButton("SALIR");
 		btnsalir.addActionListener(this);
 		btnsalir.setBounds(598, 27, 103, 30);
-		contentPane.add(btnsalir);
-		
+		contentPane.add(btnsalir);	
 	}
-
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()== btnsalir) {
@@ -105,4 +115,34 @@ public class ConsultarFacturacion extends JFrame implements ActionListener {
 	        dispose();
 		
 	}
+		private void buscarCodBoleta() {
+		    String codigoBoletaIngresado = txtnrocp.getText().trim();
+
+		    if (codigoBoletaIngresado.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Ingrese un RUC para buscar.");
+		        return;
+		    }
+
+		    ArrayList<String[]> CodBoletas = MenuPrincipal.getCodigosBoletas();
+
+		    for (String[] codigo : CodBoletas) {
+		        if (codigo[0].equalsIgnoreCase(codigoBoletaIngresado)) {
+		        	txtcomprobante.setText("\n");		        	
+		        	txtcomprobante.append("  Codigo de Boleta     " + codigo[0] + "\n");
+		        	txtcomprobante.append("  Cliente..............................: " + codigo[1] + "\n");
+		        	txtcomprobante.append("  Modelo.............................: " + codigo[2] + "\n");
+		        	txtcomprobante.append("  Precio...............................: S/. " + codigo[3] + "\n");
+		        	txtcomprobante.append("  Cantidad..........................: " + codigo[4] + "\n");
+		        	txtcomprobante.append("  Importe compra..............: S/. " + codigo[5] + "\n");
+		        	txtcomprobante.append("  Importe descuento.........: S/. " + codigo[6] + "\n");
+		        	txtcomprobante.append("  Importe pagar.................: S/. " + codigo[7] + "\n");
+		        	txtcomprobante.append("  Obsequio.........................: " + codigo[8]);
+		        	return;
+		        }
+		    }
+
+		    txtcomprobante.setText("Codigo de Boleta no encontrado.");
+		}
+		
+	
 }

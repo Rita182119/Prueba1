@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,6 @@ public class ModificacionProveedores extends JFrame implements ActionListener {
 	private	JLabel lblruc;
 	private	JLabel lblrazonsocial;
 	private	JButton btnprocesar;
-	private JTextArea txtmodificacion;
 	private JButton btnModificar;
 
 	/**
@@ -90,37 +91,81 @@ public class ModificacionProveedores extends JFrame implements ActionListener {
 		txtrazonsocial.setColumns(10);
 		txtrazonsocial.setBounds(299, 246, 288, 42);
 		contentPane.add(txtrazonsocial);
-				
-		txtmodificacion = new JTextArea();
-		txtmodificacion.setToolTipText("");
-		txtmodificacion.setBounds(299, 335, 300, 41);
-		contentPane.add(txtmodificacion);
 		
 		btnprocesar = new JButton("PROCESAR");
 		btnprocesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnprocesar.setBounds(241, 184, 195, 42);
+		btnprocesar.addActionListener(this);
 		contentPane.add(btnprocesar);
 		
 		btnModificar = new JButton("MODIFICAR");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnModificar.setBounds(69, 335, 195, 42);
+		btnModificar.setBounds(226, 335, 195, 42);
 		contentPane.add(btnModificar);
 		
 		btnSalir = new JButton("SALIR");
 		btnSalir.addActionListener(this);
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnSalir.setBounds(471, 37, 150, 32);
+		btnModificar.addActionListener(this);
 		contentPane.add(btnSalir);
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnSalir) {
-			actionPerformedbtnSalir (e);
-		}				
+			dispose();
+		}	
+		else if (e.getSource() == btnprocesar) {
+			mostrarProductos();
+		} else if (e.getSource() == btnModificar) {
+			modificarProducto();
+		}
 	}
 	protected void actionPerformedbtnSalir(ActionEvent e) {
 		dispose();
+	}
+	public void mostrarProductos() {
+		String productosA = (String) txtruc.getText();
+	    if (productosA.equals("")) {
+	        JOptionPane.showMessageDialog(this, "Ingrese un RUC válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    for (String[] producto : MenuPrincipal.getListaProveedores()) {
+	        if (producto[0].equals(productosA)) {
+	        	txtrazonsocial.setText(producto[1]);
+	            return;
+	        }
+	    }
+
+        JOptionPane.showMessageDialog(this, "RUC no encontrado.", "Alert", JOptionPane.ERROR_MESSAGE);
+	}
+	public void modificarProducto() {
+		 String RUC = txtruc.getText().trim();
+		 String RazonSocial = txtrazonsocial.getText().trim();
+
+		    if (RUC.isEmpty()) {
+		        JOptionPane.showMessageDialog(this, "Complete los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+		        return;
+		    }
+
+		    for (String[] productos : MenuPrincipal.getListaProveedores
+		    		()) {
+		        if (productos[0].equals(RUC)) {
+		        	productos[0] = RUC;
+		        	productos[1] = RazonSocial; 
+		            JOptionPane.showMessageDialog(this, "Se modificaron campos del RUC " + RUC + " correctamente.", "Modificación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+		            return;
+		        }
+		    }
+
+		    JOptionPane.showMessageDialog(this, "Razon social no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+		
+		    txtruc.setText("");
+		    txtrazonsocial.setText("");
+		    
+		    
 	}
 
 }

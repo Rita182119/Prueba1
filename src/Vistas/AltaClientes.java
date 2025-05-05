@@ -154,6 +154,9 @@ public class AltaClientes extends JDialog implements ActionListener {
 				String[] datosCliente = {dni, nombre};
 		        MenuPrincipal.agregarCliente(datosCliente);		        
 		        JOptionPane.showMessageDialog(null, "Se registró correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			 
+		        txtdni.setText("");
+		        txtnomyapell.setText("");
 			}
 	    }
 }

@@ -294,7 +294,10 @@ public class ModificacionProductos extends JFrame implements ActionListener {
 		    }
 
 		    JOptionPane.showMessageDialog(this, "Lote no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+		
+		   
+	
+	}
 	
 	
 }

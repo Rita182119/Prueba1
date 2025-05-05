@@ -69,7 +69,8 @@ public class COUV extends JFrame implements ActionListener {
 		contentPane.add(lblcantidad);
 		
 		txtcantidad = new JTextField();
-		txtcantidad.setText("15");
+		String unidadesVendidas = Integer.toString(MenuPrincipal.UVendida);
+		txtcantidad.setText(unidadesVendidas);
 		txtcantidad.setHorizontalAlignment(SwingConstants.CENTER);
 		txtcantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtcantidad.setColumns(10);
@@ -100,7 +101,9 @@ public class COUV extends JFrame implements ActionListener {
 		dispose();
 	}
 	protected void actionPerformedbtnGrabar(ActionEvent e) {
+		MenuPrincipal.UVendida = Integer.parseInt(txtcantidad.getText());
 		JOptionPane.showInternalMessageDialog(null, "Se modifico el monto de costo optimo de unidades vendidas exitosamente.", "Aviso", 1, null);
+		dispose();
 	}
 }	
 

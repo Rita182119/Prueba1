@@ -129,20 +129,22 @@ public class ConsultarProductos extends JFrame implements ActionListener {
 	    for (String[] cliente : clientes) {
 	        if (cliente[0].equalsIgnoreCase(produtoIngresado)) {
 	        	txtregistro.setText("\n");
-	            txtregistro.append("   Lote: " + cliente[0] + "\n");
-	            txtregistro.append("   Marca: " + cliente[1] + "\n");
-	            txtregistro.append("   Modelo: " + cliente[2] + "\n");
-	            txtregistro.append("   Precio: " + cliente[3] + "\n");
-	            txtregistro.append("   Cantidad: " + cliente[4] + "\n");
-	            txtregistro.append("   Bateria: " + cliente[5] + "\n");
-	            txtregistro.append("   Memoria: " + cliente[6] + "\n");
-	            txtregistro.append("   Color: " + cliente[7] + "\n");
-	            txtregistro.append("   Proveedor: " + cliente[8] + "\n");
+	            txtregistro.append("   Lote...............: " + cliente[0] + "\n");
+	            txtregistro.append("   Marca............: " + cliente[1] + "\n");
+	            txtregistro.append("   Modelo.........: " + cliente[2] + "\n");
+	            txtregistro.append("   Precio...........: " + cliente[3] + "\n");
+	            txtregistro.append("   Cantidad......: " + cliente[4] + "\n");
+	            txtregistro.append("   Bateria.........: " + cliente[5] + "\n");
+	            txtregistro.append("   Memoria......: " + cliente[6] + "\n");
+	            txtregistro.append("   Color............: " + cliente[7] + "\n");
+	            txtregistro.append("   Proveedor....: " + cliente[8] + "\n");
 	            return;
 	        }
 	    }
 
 	    txtregistro.setText("Cliente no encontrado.");
+	   
+	    
 	}
 	
 

@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -83,11 +86,16 @@ public class ConsultaProveedores extends JFrame implements ActionListener {
 		btnprocesar = new JButton("PROCESAR");
 		btnprocesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnprocesar.setBounds(43, 237, 195, 42);
+		btnprocesar.addActionListener(e -> buscarProveedor());
 		contentPane.add(btnprocesar);				
 		
 		btnlista = new JButton("LISTA DE PROVEEDORES");
 		btnlista.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnlista.setBounds(243, 354, 195, 42);
+		btnlista.addActionListener(e -> {
+			ListaProveedores ventanaLista = new ListaProveedores(MenuPrincipal.getListaProveedores());
+		    ventanaLista.setVisible(true);
+		});
 		contentPane.add(btnlista);
 				
 		btnSalir = new JButton("SALIR");
@@ -101,12 +109,31 @@ public class ConsultaProveedores extends JFrame implements ActionListener {
 	        if (e.getSource() == btnSalir) {
 	            actionPerformedbtnSalir(e);
 	        }
+	 }
+
+	 protected void actionPerformedbtnSalir(ActionEvent e) {
+	        dispose();	
+	 }
+    private void buscarProveedor() {
+	    String proveedorIngresado = txtruc.getText().trim();
+
+	    if (proveedorIngresado.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, "Ingrese un RUC para buscar.");
+	        return;
 	    }
 
-	    protected void actionPerformedbtnSalir(ActionEvent e) {
-	        dispose();
-		
-		
+	    ArrayList<String[]> proveedores = MenuPrincipal.getListaProveedores();
+
+	    for (String[] proveedor : proveedores) {
+	        if (proveedor[0].equalsIgnoreCase(proveedorIngresado)) {
+	        	txtregistro.setText("\n");		        	
+	        	txtregistro.append("       " + proveedor[1] + "\n");
+	        	return;
+	        }
+	    }
+
+	    txtregistro.setText("Proveedor no encontrado.");
 	}
+		
 
 }

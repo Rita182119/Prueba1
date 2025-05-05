@@ -109,18 +109,17 @@ public class EliminacionProductos extends JFrame implements ActionListener {
 		dispose ();
 	}
 	private void eliminarCliente() {
-		String loteIngresado = txtlote.getText().trim();
+		String loteIngresado = txtlote.getText();
 	    boolean eliminado = false;
 
 	    if (loteIngresado.isEmpty()) {
-	        txteliminacion.setText("Por favor, ingrese un DNI válido.");
+	        txteliminacion.setText("Por favor, ingrese un Lote válido.");
 	        return;
 	    }
 
 	    for (int i = 0; i < MenuPrincipal.getListaProductos().size(); i++) {
 	        String[] cliente = MenuPrincipal.getListaProductos().get(i);
 	        if (cliente[0].equals(loteIngresado)) {
-	            String nombre = cliente[1];
 	            MenuPrincipal.getListaProductos().remove(i);
 	            eliminado = true;
 	            txteliminacion.setText("Produto eliminado:\n Lote: " + loteIngresado + "\n Marca: " + cliente[1]);

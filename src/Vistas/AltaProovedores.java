@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +29,6 @@ public class AltaProovedores extends JFrame implements ActionListener {
 	private JLabel lblruc;
 	private JLabel lblrazonsocial;
 	private JButton btnprocesar;
-	private JTextArea txtregistro;
 
 	/**
 	 * Launch the application.
@@ -51,7 +52,7 @@ public class AltaProovedores extends JFrame implements ActionListener {
 	public AltaProovedores() {
 		setTitle("PROVEEDORES");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 683, 467);
+		setBounds(100, 100, 683, 365);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(199, 232, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,13 +92,11 @@ public class AltaProovedores extends JFrame implements ActionListener {
 		txtrazonsocial.setBounds(313, 193, 288, 42);
 		contentPane.add(txtrazonsocial);
 		
-		txtregistro = new JTextArea();
-		txtregistro.setBounds(313, 307, 300, 41);
-		contentPane.add(txtregistro);				
-		
 		btnprocesar = new JButton("PROCESAR");
 		btnprocesar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnprocesar.setBounds(72, 307, 195, 42);
+		btnprocesar.setBounds(247, 266, 195, 42);
+		btnprocesar.addActionListener(this);
+		    
 		contentPane.add(btnprocesar);			
 		
 		btnSalir = new JButton("SALIR");
@@ -112,12 +111,29 @@ public class AltaProovedores extends JFrame implements ActionListener {
 	        if (e.getSource() == btnSalir) {
 	            actionPerformedbtnSalir(e);
 	        }
+	        if (e.getSource() == btnprocesar) {
+	        	actionPerformedbtnprocesar(e);
+	        }
 	    }
 
 	    protected void actionPerformedbtnSalir(ActionEvent e) {
 	        dispose();
 		
-	
-		
 	}
+	    public void actionPerformedbtnprocesar(ActionEvent e) {
+	        String RUC = txtruc.getText();
+            String RazonSocial = txtrazonsocial.getText();
+	    	if (RUC.length() != 11) {
+	            JOptionPane.showMessageDialog(null, "RUC incorrecto, cantiad permitida de 11 digitos.", "Error", JOptionPane.ERROR_MESSAGE);
+	        } else {
+	        	String[] datosProveedor = {
+	            		RUC, 
+	            		RazonSocial 
+	            	};
+	            MenuPrincipal.agregarProveedores(datosProveedor);
+	            JOptionPane.showMessageDialog(null, "Proveedor registrado correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+	            txtruc.setText("");
+	            txtrazonsocial.setText("");
+	        }
+	    };
 }

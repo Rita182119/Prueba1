@@ -97,6 +97,8 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		txtdsct1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtdsct1.setColumns(10);
 		txtdsct1.setBounds(256, 118, 184, 41);
+		String porcentaje1 = Double.toString(MenuPrincipal.porcentaje1);
+		txtdsct1.setText(porcentaje1);
 		contentPane.add(txtdsct1);
 		
 		txtdsct2 = new JTextField();
@@ -104,6 +106,8 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		txtdsct2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtdsct2.setColumns(10);
 		txtdsct2.setBounds(256, 172, 184, 41);
+		String porcentaje2 = Double.toString(MenuPrincipal.porcentaje2);
+		txtdsct2.setText(porcentaje2);
 		contentPane.add(txtdsct2);
 		
 		txtdsct3 = new JTextField();
@@ -111,6 +115,8 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		txtdsct3.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtdsct3.setColumns(10);
 		txtdsct3.setBounds(256, 225, 184, 41);
+		String porcentaje3 = Double.toString(MenuPrincipal.porcentaje3);
+		txtdsct3.setText(porcentaje3);
 		contentPane.add(txtdsct3);
 		
 		txtdsct4 = new JTextField();
@@ -118,6 +124,8 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		txtdsct4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtdsct4.setColumns(10);
 		txtdsct4.setBounds(256, 279, 184, 41);
+		String porcentaje4 = Double.toString(MenuPrincipal.porcentaje4);
+		txtdsct4.setText(porcentaje4);
 		contentPane.add(txtdsct4);
 		
 		lbla = new JLabel("%");
@@ -164,13 +172,10 @@ public class DESCUENTO extends JFrame implements ActionListener {
 		dispose();
 	}
 	protected void actionPerformedbtnGrabar(ActionEvent e) {
-        // Saving the new percentage values
     	MenuPrincipal.porcentaje1 = Double.parseDouble(txtdsct1.getText());
     	MenuPrincipal.porcentaje2 = Double.parseDouble(txtdsct2.getText());
     	MenuPrincipal.porcentaje3 = Double.parseDouble(txtdsct3.getText());
     	MenuPrincipal.porcentaje4 = Double.parseDouble(txtdsct4.getText());
-
-        // Showing confirmation message
         JOptionPane.showInternalMessageDialog(null, "Cambio Realizado con Éxito", "Aviso", 1, null);
         dispose();
     }

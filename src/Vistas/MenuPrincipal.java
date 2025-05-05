@@ -54,11 +54,14 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmcontact;
 	private JMenuItem mntmversion;			
 	private JPanel contentPane;
-	
-	// Declarando Variables Globales 
-	
-		// Cliente
+		
     	private static ArrayList<String[]> listaClientes = new ArrayList<>();
+    	static {
+    		listaClientes.add(new String[]{"12345678", "Aquiles Castro"});
+    		listaClientes.add(new String[]{"74852478", "Benito Camelo"});
+    		listaClientes.add(new String[]{"12598652", "Paco Gertes"});
+    		listaClientes.add(new String[]{"36547521", "Juanito Rosado"});
+    	}
     	public static void agregarCliente(String[] datos) {
             listaClientes.add(datos);
             System.out.println("Cliente registrado: " + datos[0] + " - " + datos[1]);
@@ -67,10 +70,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     	    return listaClientes;
     	}
     	
-    	//Produtos
     	public static ArrayList<String[]> listaProductos = new ArrayList<>();
     	static {
-            // Agregar productos manualmente (en duro)
             listaProductos.add(new String[]{"001", "Sansung", "S24", "5000", "100", "300", "258", "Plateado", "Aleman"});
             listaProductos.add(new String[]{"002", "Motorola", "G30", "500", "100", "300", "258", "Plateado", "Frnaces"});
             listaProductos.add(new String[]{"003", "Iphone", "Iphone 14", "3000", "100", "300", "258", "Plateado", "EEUU"});
@@ -84,53 +85,54 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     	    return listaProductos;
     	}
     	
+    	public static ArrayList<String[]> listaProveedores = new ArrayList<>();
+    	static {
+    		listaProveedores.add(new String[]{"123456789123", "Empresas ErIL"});
+    		listaProveedores.add(new String[]{"356842595842", "Prueba SA"});
+    		listaProveedores.add(new String[]{"452896321475", "Cariñosas SA"});
+    		listaProveedores.add(new String[]{"125478956465", "Las Sirenitas SAC"});
+        }
+    	public static void agregarProveedores(String[] datosProveedores) {
+    		listaProveedores.add(datosProveedores);
+            System.out.println("Proveedor registrado: " + datosProveedores[0] + " - " + datosProveedores[1]);
+        }
+    	public static ArrayList<String[]> getListaProveedores() {
+    	    return listaProveedores;
+    	}
+    	
+    	private static ArrayList<String[]> codigosBoletas = new ArrayList<>();
+    	private static int contadorBoletas = 1;
+    	public static void agregarCodBoleta(String[] datos) {
+    	    codigosBoletas.add(datos);
+    	    contadorBoletas++;
+    	}
+    	public static ArrayList<String[]> listaCodBoleta = new ArrayList<>();
+    	public static String generarCodigoBoleta() {
+    	    return String.format("B001-%06d", contadorBoletas);
+    	}
+    	public static ArrayList<String[]> getCodigosBoletas() {
+    	    return codigosBoletas;
+    	}
+    	
+    	// Descuento del 10% por compras de 1 a 5 unidaes
+		public static double porcentaje1 = 10;
+		// Descuento del 20% por compras de 6 a 10 unidaes
+		public static double porcentaje2 = 20;
+		// Descuento del 30% por compras de 11 a 15 unidaes
+		public static double porcentaje3 = 30;
+		// Descuento del 40% por compras de 16 a 20 unidaes
+		public static double porcentaje4 = 40;
+
+		// Regalo por la compra de 1 unidad
+		public static String obsequio1 = "Vidrio templado";
+		// Regalo por la compra de 2 a 5 unidad
+		public static String obsequio2 = "Auriculares inalambricos";
+		// Regalo por la compra de 6 a mas unidad
+		public static String obsequio3 = "Parlantes Bluetooth";
 		
-		// Datos mínimos de la 1ra cocina
-		public static String modelo0 ="SAMSUNG SM-A215U NEGRO";
-		public static double precio0 = 949.0;
-		public static double fondo0 = 58.6;
-		public static double ancho0 = 60.0;
-		public static double alto0 = 91.0;
-		public static int quemadores0 = 4;
-		// Datos mínimos de la 2da cocina
-		public static String modelo1 = "LG A567";
-		public static double precio1 = 1089.0;
-		public static double ancho1 = 80.0;
-		public static double alto1 = 94.0;
-		public static double fondo1 = 67.5;
-		public static int quemadores1 = 6;
+		// Cantidad optima de unidades vendidas
+		public static int UVendida = 15;
 
-		// Porcentajes de descuento
-		public static double porcentaje1 = 7.5;
-		public static double porcentaje2 = 10.0;
-		public static double porcentaje3 = 12.5;
-		public static double porcentaje4 = 15.0;
-
-		// Obsequios
-		public static String obsequio1 = "Cupon de Dst. del 50% en las Sirenitas";
-		public static String obsequio2 = "Cupon de Dst. del 70% en las Sirenitas";
-		public static String obsequio3 = "Servicio completo por 1 día";
-
-		// Parámetros adicionales
-		public static int cantidadOptima = 30;
-		public static double cuotaDiaria = 75000.0;
-		
-		// VARIABLES PUBLIC STATICS GLOBALES NUEVAS 
-		// Importe acumulado de ventas por modelo
-		public static double importeAcumulado0, importeAcumulado1, importeAcumulado2,
-		                      importeAcumulado3, importeAcumulado4, importeAcumuladoTotal;
-
-		// Porcentaje de cuota diaria por modelo
-		public static double porcentajeCuota0, porcentajeCuota1, porcentajeCuota2,
-		                      porcentajeCuota3, porcentajeCuota4, porcentajeCuotaTotal;
-
-		// Contador de cantidad acumulada de ventas por modelo
-		public static int contadorVenta0, contadorVenta1, contadorVenta2,
-		                  contadorVenta3, contadorVenta4, contadorVentaTotal;
-
-		// Cantidad acumulada de unidades vendidas por modelo
-		public static int cantUniVendidas0, cantUniVendidas1, cantUniVendidas2,
-		                  cantUniVendidas3, cantUniVendidas4;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

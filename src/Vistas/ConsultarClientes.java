@@ -90,7 +90,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		
 		btnlista = new JButton("LISTA DE CLIENTES");
 		btnlista.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnlista.setBounds(278, 340, 195, 42);
+		btnlista.setBounds(402, 345, 195, 42);
 		btnlista.addActionListener(e -> {
 		    ListaClientes ventanaLista = new ListaClientes(MenuPrincipal.getListaClientes());
 		    ventanaLista.setVisible(true);
@@ -109,6 +109,16 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 		btnSalir.setBounds(579, 11, 150, 32);
 		
 		contentPane.add(btnSalir);
+		
+		JButton btnborrar = new JButton("Borrar");
+		btnborrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtdni.setText("");
+				txtregistro.setText("");
+			}
+		});
+		btnborrar.setBounds(112, 345, 189, 42);
+		contentPane.add(btnborrar);
 	}
 
 
@@ -131,7 +141,7 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 	    ArrayList<String[]> clientes = MenuPrincipal.getListaClientes();
 
 	    for (String[] cliente : clientes) {
-	        if (cliente[0].equalsIgnoreCase(dniIngresado)) {	            // Supongamos: cliente[0]=DNI, cliente[1]=Nombre, cliente[2]=Teléfono, etc.
+	        if (cliente[0].equalsIgnoreCase(dniIngresado)) {	            
 	            String info = cliente[1];
 	            txtregistro.setText(info);
 	            return;
@@ -140,9 +150,6 @@ public class ConsultarClientes extends JFrame implements ActionListener {
 
 	    txtregistro.setText("Cliente no encontrado.");
 	}
-	
-	
-	
 }
        
 

@@ -75,6 +75,7 @@ public class REGALO extends JFrame implements ActionListener {
 		txtregalo1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtregalo1.setColumns(10);
 		txtregalo1.setBounds(233, 139, 210, 41);
+		txtregalo1.setText(MenuPrincipal.obsequio1);
 		contentPane.add(txtregalo1);
 		
 		lblunidades2 = new JLabel("2 a 5 unidades");
@@ -87,6 +88,7 @@ public class REGALO extends JFrame implements ActionListener {
 		txtregalo2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtregalo2.setColumns(10);
 		txtregalo2.setBounds(233, 193, 210, 41);
+		txtregalo2.setText(MenuPrincipal.obsequio2);
 		contentPane.add(txtregalo2);
 		
 		lblunidades3 = new JLabel("6 a mas unidades");
@@ -99,6 +101,7 @@ public class REGALO extends JFrame implements ActionListener {
 		txtregalo3.setFont(new Font("Tahoma", Font.BOLD, 16));
 		txtregalo3.setColumns(10);
 		txtregalo3.setBounds(233, 246, 210, 41);
+		txtregalo3.setText(MenuPrincipal.obsequio3);
 		contentPane.add(txtregalo3);
 		
 		btnGrabar = new JButton("GRABAR");

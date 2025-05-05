@@ -73,6 +73,10 @@ public class ModificacionClientes extends JDialog implements ActionListener {
 		comboBox = new JComboBox<>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBox.setBounds(345, 137, 306, 42);
+		comboBox.addItem("Seleccione un DNI");
+		for (String[] cliente : MenuPrincipal.getListaClientes()) {
+		    comboBox.addItem(cliente[0]);
+		}
 		contentPane.add(comboBox);
 
 		lblnomyapelli = new JLabel("NOMBRES Y APELLIDOS");
@@ -106,10 +110,7 @@ public class ModificacionClientes extends JDialog implements ActionListener {
 		btnSalir.setBounds(511, 23, 150, 32);
 		contentPane.add(btnSalir);
 
-		comboBox.addItem("Seleccione un DNI");
-		for (String[] cliente : MenuPrincipal.getListaClientes()) {
-		    comboBox.addItem(cliente[0]);
-		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -132,7 +133,7 @@ public class ModificacionClientes extends JDialog implements ActionListener {
 
 	    for (String[] cliente : MenuPrincipal.getListaClientes()) {
 	        if (cliente[0].equals(dniSeleccionado)) {
-	            txtnomyapelli.setText(cliente[1]); // Mostrar nombre
+	            txtnomyapelli.setText(cliente[1]);
 	            return;
 	        }
 	    }
