@@ -177,7 +177,39 @@ public class Facturacion extends JFrame implements ActionListener, ItemListener 
 		    String[] producto = MenuPrincipal.getListaProductos().get(item - 1); 
 		    return Double.parseDouble(producto[3]);
 	}
-    protected void actionPerformedBtnVender(ActionEvent e) {
+    protected void actionPerformedBtnVender(ActionEvent e) {    	
+        if (cbocliente.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cmbmodelo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un modelo.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String cantidadTexto = txtcantidad.getText().trim();
+        if (cantidadTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una cantidad.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            int cantidad = Integer.parseInt(cantidadTexto);
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a cero.", "Validación", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "La cantidad debe ser un número válido.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (txtprecio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Seleccione un modelo para cargar el precio.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         obtenerDatos();
         importeCompra();
         importeDescuento();
@@ -213,35 +245,39 @@ public class Facturacion extends JFrame implements ActionListener, ItemListener 
     }
     
     void mostrarResultados() {
-        String codigoBoleta = MenuPrincipal.generarCodigoBoleta();
-        String clienteSeleccionado = (String) cbocliente.getSelectedItem();
-        String modeloSeleccionado = (String) cmbmodelo.getSelectedItem();
-        txtfacturacion.setText("");
-        txtfacturacion.append("                                                               ----------------------------------------------\n");
-        txtfacturacion.append("                                                               BOLETA DE VENTA " + codigoBoleta +  "\n");
-        txtfacturacion.append("                                                               ----------------------------------------------\n");
-        txtfacturacion.append("\n\n");
-        txtfacturacion.append("Codigo de Boleta...........:  " + codigoBoleta + "\n");
-        String[] datosCodBoleta = {
-        	    codigoBoleta, 
-        	    clienteSeleccionado, 
-        	    modeloSeleccionado,
-        	    String.valueOf(precioVenta), 
-        	    String.valueOf(cantidadVenta),
-        	    String.valueOf(impPagar),
-        	    String.valueOf(impDescuento),
-        	    String.valueOf(impPagar),
-        	    obsequio
-        	};
-        MenuPrincipal.agregarCodBoleta(datosCodBoleta);
-        txtfacturacion.append("Cliente..............................: " + clienteSeleccionado + "\n");
-        txtfacturacion.append("Modelo.............................: " + modeloSeleccionado + "\n");
-        txtfacturacion.append("Precio...............................: S/. " + precioVenta + "\n");
-        txtfacturacion.append("Cantidad..........................: " + cantidadVenta + "\n");
-        txtfacturacion.append("Importe compra..............: S/. " + impCompra + "\n");
-        txtfacturacion.append("Importe descuento.........: S/. " + impDescuento + "\n");
-        txtfacturacion.append("Importe pagar.................: S/. " + impPagar + "\n");
-        txtfacturacion.append("Obsequio.........................: " + obsequio);
+	        String codigoBoleta = MenuPrincipal.generarCodigoBoleta();
+	        String clienteSeleccionado = (String) cbocliente.getSelectedItem();
+	        String modeloSeleccionado = (String) cmbmodelo.getSelectedItem();
+	        txtfacturacion.setText("");
+	        txtfacturacion.append("                                                               ----------------------------------------------\n");
+	        txtfacturacion.append("                                                               BOLETA DE VENTA " + codigoBoleta +  "\n");
+	        txtfacturacion.append("                                                               ----------------------------------------------\n");
+	        txtfacturacion.append("\n\n");
+	        txtfacturacion.append("Codigo de Boleta...........:  " + codigoBoleta + "\n");
+	        String[] datosCodBoleta = {
+	        	    codigoBoleta, 
+	        	    clienteSeleccionado, 
+	        	    modeloSeleccionado,
+	        	    String.valueOf(precioVenta), 
+	        	    String.valueOf(cantidadVenta),
+	        	    String.valueOf(impPagar),
+	        	    String.valueOf(impDescuento),
+	        	    String.valueOf(impPagar),
+	        	    obsequio
+	        	};
+	        MenuPrincipal.agregarCodBoleta(datosCodBoleta);
+	        txtfacturacion.append("Cliente..............................: " + clienteSeleccionado + "\n");
+	        txtfacturacion.append("Modelo.............................: " + modeloSeleccionado + "\n");
+	        txtfacturacion.append("Precio...............................: S/. " + precioVenta + "\n");
+	        txtfacturacion.append("Cantidad..........................: " + cantidadVenta + "\n");
+	        txtfacturacion.append("Importe compra..............: S/. " + impCompra + "\n");
+	        txtfacturacion.append("Importe descuento.........: S/. " + impDescuento + "\n");
+	        txtfacturacion.append("Importe pagar.................: S/. " + impPagar + "\n");
+	        txtfacturacion.append("Obsequio.........................: " + obsequio);
+	    	JOptionPane.showMessageDialog(this, "Se realizo la venta Exitosamente.", "Alert", JOptionPane.INFORMATION_MESSAGE);
+	        txtcantidad.setText("");
+	        cmbmodelo.setSelectedIndex(0);
+	        cbocliente.setSelectedIndex(0);
     }    
 	
 }

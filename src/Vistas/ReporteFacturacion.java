@@ -134,15 +134,20 @@ public class ReporteFacturacion extends JFrame {
 	    int TOPE_SUGERIDO = MenuPrincipal.UVendida;
 
 	    for (String[] venta : ventas) {
-	        String modelo = venta[2];
-	        int cantidad = Integer.parseInt(venta[4]);
-	        cantidades.put(modelo, cantidades.getOrDefault(modelo, 0) + cantidad);
+	    	System.out.println("Modelo: " + venta[2] + ", Cantidad: " + venta[4]);
+	    	String modelo = venta[2].trim().toLowerCase();
+	    	String claveModelo = venta[2].trim().toLowerCase();
+	    	cantidades.put(claveModelo, cantidades.getOrDefault(claveModelo, 0) + Integer.parseInt(venta[4]));
+	        System.out.println(cantidades);
 	    }
 
 	    txtresultado.setText("COMPARACIÓN CON TOPE SUGERIDO DE VENTA\n\n");
 
 	    for (String[] modelo : MenuPrincipal.getListaProductos()) {
-	        int cantidadVendida = cantidades.getOrDefault(modelo, 0);
+	    	String claveModelo = (modelo[1] + " - " + modelo[2]).trim().toLowerCase();
+	    	int cantidadVendida = cantidades.getOrDefault(claveModelo, 0);
+	        System.out.println(cantidadVendida);
+
 	        txtresultado.append("Modelo: " + modelo[1] + " - " + modelo[2] + "\n");
 	        txtresultado.append(" - Unidades vendidas: " + cantidadVendida + "\n");
 

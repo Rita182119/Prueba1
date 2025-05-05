@@ -230,16 +230,9 @@ public class AltaProductos extends JFrame implements ActionListener {
 		            	    memoria, 
 		            	    color, 
 		            	    proveedor
-		            	};
-		            
-		            
-		            // Agregar a la lista global
+		            	};         
 		            MenuPrincipal.agregarProductos(datosProductos);
-
-		            // Mostrar mensaje
 		            JOptionPane.showMessageDialog(null, "Producto registrado correctamente.");
-
-		            // Limpiar campos si deseas
 		            dispose();
 		        } catch (Exception ex) {
 		            JOptionPane.showMessageDialog(null, "Error al registrar el producto. Verifica los campos.");
