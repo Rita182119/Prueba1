@@ -66,7 +66,6 @@ public class ReporteFacturacion extends JFrame {
 		cboreporte.setBounds(116, 22, 294, 22);
 		cboreporte.addItem("Venta por modelo");
 		cboreporte.addItem("Venta por relación a la venta óptima");
-		cboreporte.addItem("Opción 3");
 		cboreporte.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	mostrarNombreActual();
